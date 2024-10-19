@@ -1,3 +1,13 @@
+# Determine the potential "movie success" of a fictitious feature film based on different public metrics, 
+# such as, but not limited to box office revenue, date of release, movie genre (selected by the team), movie production budget, and more.
+
+# exploratory data analysis
+# measures:  revenue, budget, profits (revenue - budget), popularity why is $ the best measure
+# things to group/aggregate by:  date of release, date of release in october, year of release (from date), country
+# columns that don't matter
+# filter production status
+# missing data - filter out no $ 
+
 import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit
