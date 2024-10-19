@@ -1,6 +1,5 @@
 ## inputs:
 - the csv, with column names
-- 
 
 ## outputs:
 

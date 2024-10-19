@@ -1,14 +1,27 @@
 import numpy as np
 import pandas as pd
-
-def main(data_loc):
-  df = pd.read_csv(data_loc)
-
-df['column'].min()
-df['column'].max()
-df['column'].mean()
-
-scipy
 import seaborn as sns
-from matplotlib import pyplot
+import matplotlib.pyplot as plt
+import sys
+
+input_loc = sys.argv[1].replace("\\", "/")
+print(input_loc)
+
+def main(input_loc):
+
+  input_df = pd.read_csv(input_loc)
+
+  sns.pairplot(input_df, kind="reg")
+  plt.show()
+
+
+main(input_loc)
+
+
+
+# df['column'].min()
+# df['column'].max()
+# df['column'].mean()
+
+# scipy
 
