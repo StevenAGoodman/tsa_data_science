@@ -1,6 +1,7 @@
 ## inputs:
-- csv, with headers
+- the csv, with column names
 - 
+
 ## outputs:
 
 
