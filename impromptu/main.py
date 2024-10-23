@@ -16,12 +16,3 @@ def main(input_loc):
 
 
 main(input_loc)
-
-
-
-# df['column'].min()
-# df['column'].max()
-# df['column'].mean()
-
-# scipy
-
