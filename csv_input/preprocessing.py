@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import os
+from matplotlib import pyplot as plt
+import seaborn as sns
 
 #reset
 try:
@@ -63,3 +65,17 @@ def main(data_loc):
 df = main(data_loc)
 
 df.to_csv("./preprocessed_data.csv")
+
+
+def merge_testing():
+    horror_df = pd.read_excel("./csv_input/horror_movies.xlsx")
+    general_df = pd.read_csv("./data_gathering/imdb_ratings.csv")
+
+    # horror_df.merge(general_df, how="left", left_on=["title", 'year'], right_on=["title", "year"])
+    horror_df.merge(general_df, how="left", left_on=["title"], right_on=["title"])
+
+horror_df = pd.read_excel("./csv_input/horror_movies.xlsx")
+horror_df['year'] = horror_df['release_date'].dt.year
+horror_df1 = horror_df[['year', 'budget', 'revenue', 'vote_average']]
+sns.pairplot(horror_df1)
+plt.show()

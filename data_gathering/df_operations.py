@@ -13,22 +13,27 @@ def imdb_og_filtering():
                 data = pd.DataFrame(data, index=0)
                 df = pd.concat([df, data], axis=0)
 
-def imdb_titles_rating_merg():
-    title_df = pd.read_csv("./data_gathering/imdb_processed_titles.tsv", sep="\t")
-    df.set_index(0, inplace=True)
+def imdb_titles_rating_merge():
+    title_df = pd.read_csv("./data_gathering/imdb_processed_titles.tsv", sep="\t", names=["id", "format", "title", "old_title", "#", 'release_year', '#2', 'runtime', 'genre'])
+    title_df.set_index("id", inplace=True)
     ratings_df = pd.read_csv("./data_gathering/title.ratings.tsv", sep="\t")
-    df.set_index('tconst', inplace=True)
+    ratings_df.set_index('tconst', inplace=True)
             
     df = pd.merge(title_df, ratings_df, left_index=True, right_index=True)
-    df.rename(columns={0:"id", 1:"title", 2:"avg_imdb_rating", 3:"runtime_min"})
-    df.index("title")
+    df = df[["title","runtime","genre", "averageRating"]]
+    df = df.set_index("title")
     return df
 
 def main():
-    imdb_df = imdb_titles_rating_merg()
+    imdb_df = imdb_titles_rating_merge()
     numbers_df = pd.read_csv("./data_gathering/theNumbers_finance.csv")
-    numbers_df.index("title")
-    
+    numbers_df = numbers_df.set_index("title")[["release_date", "budget","global_revenue"]] 
+
+    imdb_df = imdb_df[~imdb_df.index.duplicated(keep='first')]
+    numbers_df = numbers_df[~numbers_df.index.duplicated(keep='first')]
+
     df = pd.concat([imdb_df, numbers_df], axis=1)
+    df = df.loc[numbers_df.index]
     df.to_csv("./data_gathering/imdb_ratings.csv")
     
+main()
