@@ -12,12 +12,16 @@ import sys
 # ====================================================================
 
 # Import the csv data
-df = pd.read_csv("input.csv")
+filepath = input("Enter the relative path of the csv: ")
+try:
+    df = pd.read_csv(filepath)
+except Exception as e:
+    sys.stderr.write(e)
 df.dropna(inplace=True)
 
-# 
-x_dim = sys.argv[1]
-y_dim = sys.argv[2]
+# Get dimesions
+x_dim = input("The independent (x) dimesion column name: ")
+y_dim = input("The dependent (y) dimesion column name:   ")
 assert x_dim in list(df.columns) and y_dim in list(df.columns), "not valid col names"
 assert df.dtypes[x_dim] in ["int64", "float64"] and df.dtypes[y_dim] in ["int64", "float64"]
 
