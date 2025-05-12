@@ -16,7 +16,7 @@ filepath = input("Enter the relative path of the csv: ")
 try:
     df = pd.read_csv(filepath)
 except Exception as e:
-    sys.stderr.write(e)
+    sys.stderr.write("Couldn't read the csv: " + str(e))
 df.dropna(inplace=True)
 
 # Get dimesions
@@ -64,9 +64,7 @@ plt.figure()
 plt.title("exponential regression")
 plt.scatter(x, y)
 poly = np.poly1d(np.polyfit(np.log(x), y, 1))
-plt.plot(line, poly(line), color="red")
-
-## logistic
+plt.plot(line, poly(line), color="red"
 
 ## sinusodal
 plt.figure()
