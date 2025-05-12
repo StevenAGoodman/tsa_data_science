@@ -4,9 +4,18 @@ from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
 import sys
 
+# ====================================================================
+# This little script expects a tabular csv with two numerical columns:
+#     Arg 1: The independent (x) dimesion column name
+#     Arg 2: The dependent (y) dimesion column name
+# Note! This only handles NUMERIC data, not categorical or other jazz.
+# ====================================================================
+
+# Import the csv data
 df = pd.read_csv("input.csv")
 df.dropna(inplace=True)
 
+# 
 x_dim = sys.argv[1]
 y_dim = sys.argv[2]
 assert x_dim in list(df.columns) and y_dim in list(df.columns), "not valid col names"
